@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <title>Linux kernel hooks</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+  <h1> <a href='/'>Linux kernel</a>: version {{versions['version'][0]}} vs {{versions['version'][1]}}</h1>
+  <table>
+    <tr>
+      <th>v{{versions['version'][0]}}</th>
+      <th>v{{versions['version'][1]}}</th>
+    </tr>
+    {% for i in range(result_a|length) %}
+    <tr>
+      <td class='{{result_a[i][1]}}'> {{result_a[i][0]|safe}}</td>
+      <td class='{{result_b[i][1]}}'> {{result_b[i][0]|safe}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+</body>
+
+</html>

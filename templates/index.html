@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Linux kernel hooks</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+  <h1>Linux Kernel hooks checker</h1>
+  Choose two versions to compare:<hr>
+  <p>
+    <form action="compare" method="POST">
+      {% for result in versions %}
+      <label class="checkbox-inline">
+        <input type="checkbox" class='check' name="version" value="{{result[1]}}"> v{{result[1]}}<br>
+      </label>
+      {% endfor %}
+      <P><input type="submit" id='submit' disabled="disabled" value="Compare">
+    </form>
+
+
+    <script>
+      var checks = document.querySelectorAll('.check');
+      var sendbtn = document.getElementById('submit');
+
+      var max = 2;
+      for (var i = 0; i < checks.length; i++)
+        checks[i].onclick = selectiveCheck;
+
+      function selectiveCheck(event) {
+        var checkedChecks = document.querySelectorAll('.check:checked');
+        if (checkedChecks.length >= max + 1) {
+          sendbtn.disabled = true;
+          return false;
+        } else if (checkedChecks.length == max)
+          sendbtn.disabled = false;
+      }
+    </script>
+</body>
+
+</html>
